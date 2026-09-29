@@ -1,0 +1,51 @@
+
+<main class="grid-container">
+	<header><h1>Artistas</h1></header>
+	<nav aria-label="Navegação principal">
+		<ul class="menu">
+			<li><a href="/">Início</a></li>
+			<li><a href="/filmes">Filmes</a></li>
+			<li><a href="/diretores">Diretores</a></li>
+		</ul>
+	</nav>
+
+	{{#if artista}}
+		<section class="grid-x grid-margin-x">
+			<div class="cell medium-8">
+				<h2>{{artista.nome}}</h2>
+				{{#if artista.foto}}<p>Foto: {{artista.foto}}</p>{{/if}}
+				<h3>Filmes</h3>
+				<ul class="vertical menu">
+					{{#each artista.filmes}}
+						<li><a href="/filmes/{{this.id}}">{{this.nome}}</a></li>
+					{{else}}
+						<li>Nenhum filme cadastrado.</li>
+					{{/each}}
+				</ul>
+			</div>
+		</section>
+	{{else}}
+		<div class="grid-x grid-margin-x">
+			<section class="cell medium-5">
+				<h2>Cadastrar artista</h2>
+				<form action="/artistas" method="post">
+					<label for="artista-nome">Nome</label>
+					<input id="artista-nome" name="nome" required>
+					<label for="artista-foto">Foto</label>
+					<input id="artista-foto" name="foto">
+					<button class="button" type="submit">Cadastrar</button>
+				</form>
+			</section>
+			<section class="cell medium-7">
+				<h2>Todos os artistas</h2>
+				<ul class="vertical menu">
+					{{#each artistas}}
+						<li><a href="/artistas/{{this.id}}">{{this.nome}}</a></li>
+					{{else}}
+						<li>Nenhum artista cadastrado.</li>
+					{{/each}}
+				</ul>
+			</section>
+		</div>
+	{{/if}}
+</main>

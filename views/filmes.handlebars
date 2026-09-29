@@ -1,0 +1,53 @@
+
+<main class="grid-container">
+	<header><h1>Filmes</h1></header>
+	<nav aria-label="Navegação principal">
+		<ul class="menu">
+			<li><a href="/">Início</a></li>
+			<li><a href="/artistas">Artistas</a></li>
+			<li><a href="/diretores">Diretores</a></li>
+		</ul>
+	</nav>
+
+	<div class="grid-x grid-margin-x">
+		<section class="cell medium-5">
+			<h2>Cadastrar filme</h2>
+			<form action="/filmes" method="post">
+				<label for="filme-nome">Nome</label>
+				<input id="filme-nome" name="nome" required>
+				<label for="filme-ano">Ano</label>
+				<input id="filme-ano" name="ano" type="number">
+				<label for="filme-diretor">Diretor</label>
+				<select id="filme-diretor" name="diretorId">
+					<option value="">Sem diretor</option>
+					{{#each diretores}}
+						<option value="{{this.id}}">{{this.nome}}</option>
+					{{/each}}
+				</select>
+				<fieldset class="fieldset">
+					<legend>Artistas</legend>
+					{{#each artistas}}
+						<label><input type="checkbox" name="artistaIds" value="{{this.id}}"> {{this.nome}}</label>
+					{{else}}
+						<p>Nenhum artista cadastrado.</p>
+					{{/each}}
+				</fieldset>
+				<button class="button" type="submit">Cadastrar</button>
+			</form>
+		</section>
+		<section class="cell medium-7">
+			<h2>Todos os filmes</h2>
+			<ul class="vertical menu">
+				{{#each filmes}}
+					<li>
+						<a href="/filmes/{{this.id}}">
+							{{this.nome}}{{#if this.diretor}} - {{this.diretor.nome}}{{/if}}
+						</a>
+					</li>
+				{{else}}
+					<li>Nenhum filme cadastrado.</li>
+				{{/each}}
+			</ul>
+		</section>
+	</div>
+</main>

@@ -1,0 +1,29 @@
+
+<main class="grid-container">
+	<nav aria-label="Navegação principal">
+		<ul class="menu">
+			<li><a href="/">Início</a></li>
+			<li><a href="/filmes">Todos os filmes</a></li>
+		</ul>
+	</nav>
+
+	<article class="grid-x grid-margin-x">
+		<section class="cell medium-8">
+			<h1>{{filme.nome}}</h1>
+			<dl>
+				<dt>Ano</dt>
+				<dd>{{filme.ano}}</dd>
+				<dt>Diretor</dt>
+				<dd>{{#if filme.diretor}}{{filme.diretor.nome}}{{else}}Não informado{{/if}}</dd>
+			</dl>
+			<h2>Artistas</h2>
+			<ul class="vertical menu">
+				{{#each filme.artistas}}
+					<li><a href="/artistas/{{this.id}}">{{this.nome}}</a></li>
+				{{else}}
+					<li>Nenhum artista cadastrado.</li>
+				{{/each}}
+			</ul>
+		</section>
+	</article>
+</main>
